@@ -3,7 +3,7 @@
 
 Kliknij zielony przycisk z napisem ***CODE***. Ukaże Ci sie małe menu wyboru. Naciśnij wtedy przycisk ***Download ZIP***.
 
-![](gifdbpmody.gif)
+![](https://i.gyazo.com/5a599677a375b2c5bca7e6e54aba2897.gif)
 
 # Jak wgrać mody do Discord Bot Maker'a?
 
