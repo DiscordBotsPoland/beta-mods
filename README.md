@@ -1,7 +1,7 @@
 
 # Jak pobrać mody?
 
-Kliknij zielony przycisk z napisem `CODE`. Ukaże Ci sie małe menu wyboru. Naciśnij wtedy przycisk `Download ZIP`.
+Kliknij zielony przycisk z napisem `CODE`. Ukaże Ci sie małe menu wyboru. Naciśnij przycisk `Download ZIP`.
 
 ![](https://i.gyazo.com/5a599677a375b2c5bca7e6e54aba2897.gif)
 
