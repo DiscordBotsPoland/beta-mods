@@ -178,7 +178,7 @@ module.exports = {
         result = Boolean(member.voice?.deaf);
         break;
       case 9:
-        result = member.id === msg?.author.id || member.id === interaction.member.id;
+        result = member.id === (msg ?? interaction).member.id
         break;
       case 10:
         result = member.id === (msg ?? interaction).guild.ownerId
