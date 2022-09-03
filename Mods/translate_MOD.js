@@ -2,7 +2,7 @@
 module.exports = {
   name: 'Translate',
   section: 'Other Stuff',
-  meta: { version: "2.1.5", preciseCheck: true, author: null, authorUrl: null, downloadUrl: null },
+  meta: { version: "2.1.6", preciseCheck: true, author: null, authorUrl: null, downloadUrl: null },
 
   subtitle(data) {
     return `Translate to [${data.translateTo}]`;
