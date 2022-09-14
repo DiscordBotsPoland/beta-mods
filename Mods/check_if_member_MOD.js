@@ -51,6 +51,7 @@ module.exports = {
       ${!isEvent && '<option value="9">Is Command Author?</option>'}
       ${!isEvent && '<option value="10">Is Current Server Owner?</option>'}
       ${!isEvent && '<option value="11">Is Boosting Current Server?</option>'}
+      <option value="12">Is in timeout?</option>
     </select>
   </div>
   <div id="varNameContainer2" style="display: none; float: right; width: 60%;">
@@ -178,13 +179,16 @@ module.exports = {
         result = Boolean(member.voice?.deaf);
         break;
       case 9:
-        result = member.id === (msg ?? interaction).member.id
+        result = member.id === (msg?.author.id ?? interaction.user.id);
         break;
       case 10:
-        result = member.id === (msg ?? interaction).guild.ownerId
+        result = member.id === (msg ?? interaction).guild.ownerId;
         break;
       case 11:
         result = Boolean(member.premiumSinceTimestamp);
+        break;
+      case 12:
+        result = member.isCommunicationDisabled();
         break;
       default:
         console.log('Please check your "Check if Member" action! There is something wrong...');
