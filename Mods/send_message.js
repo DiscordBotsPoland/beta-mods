@@ -86,6 +86,7 @@ module.exports = {
     "ephemeral",
     "tts",
     "overwrite",
+    "mention",
     "dontSend",
     "editMessage",
     "editMessageVarName",
@@ -440,7 +441,7 @@ module.exports = {
 
   <tab label="Settings" icon="cogs">
     <div style="padding: 8px;">
-      <dbm-checkbox style="float: left;" id="reply" label="Reply to Interaction if Possible" checked></dbm-checkbox>
+      <dbm-checkbox style="float: left;" id="reply" label="Reply to Command if Possible" checked></dbm-checkbox>
 
       <dbm-checkbox style="float: right;" id="ephemeral" label="Make Reply Private (Ephemeral)"></dbm-checkbox>
 
@@ -451,11 +452,16 @@ module.exports = {
 
         <dbm-checkbox id="overwrite" label="Overwrite Changes"></dbm-checkbox>
 
-        <dbm-checkbox id="dontSend" label="Don't Send Message"></dbm-checkbox>
+        <dbm-checkbox id="mention" label="Mention If reply"></dbm-checkbox>
+
       </div>
 
       <br>
 
+      <dbm-checkbox id="dontSend" label="Don't Send Message"></dbm-checkbox>
+
+      <br>
+      
       <hr class="subtlebar" style="margin-top: 4px; margin-bottom: 4px;">
 
       <br>
@@ -572,7 +578,9 @@ module.exports = {
     let target = await this.getSendReplyTarget(channel, this.evalMessage(data.varName, cache), cache);
 
     let messageOptions = {};
-
+    messageOptions.allowedMentions = {};
+    messageOptions.allowedMentions.repliedUser = []
+    messageOptions.allowedMentions.repliedUser = Boolean(data.mention)
     const overwrite = data.overwrite;
 
     let isEdit = 0;
@@ -822,8 +830,8 @@ module.exports = {
         .catch((err) => this.displayError(data, cache, err));
     }
 
-    else if (isMessageTarget && target?.reply) {
-      target
+    else if (data.reply === true && !canReply) {
+      cache.msg
         .reply(messageOptions)
         .then(onComplete)
         .catch((err) => this.displayError(data, cache, err));
