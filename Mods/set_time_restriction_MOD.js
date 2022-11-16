@@ -5,8 +5,8 @@ module.exports = {
     version: '2.1.6',
     preciseCheck: false,
     author: 'DBM Mods',
-    authorUrl: 'https://github.com/dbm-network/mods',
-    downloadURL: 'https://github.com/dbm-network/mods/blob/master/actions/set_time_restriction_MOD.js',
+    authorUrl: 'https://github.com/Gotowka', 
+    downloadUrl: 'https://github.com/Gotowka/mydbm/blob/main/actions/set_time_restriction_MOD.js'
   },
 
   subtitle(data) {
@@ -186,14 +186,17 @@ module.exports = {
 
     if (isNaN(value)) return console.error(`${value} is not a valid number.`);
 
-    let cmd;
-    for (const command of this.getDBM().Files.data.commands) {
-      if (command && JSON.stringify(command.actions) === JSON.stringify(cache.actions)) {
-        cmd = command;
-        break;
+    const cmd = Command()
+    function Command() {
+      if (cache.interaction) {
+        return cache.interaction.commandName;
+      } else if (cache.msg) {
+        const file = require('../data/settings.json');
+        if (cache.msg.content.includes(file.tag)) {
+          return cache.msg.content.slice(file.tag.length).trim().split(/ +/g).shift();
+        }
       }
     }
-
     const TRData = cache.interaction ?? cache.msg;
     const timeLeft = this.TimeRestriction(TRData, cmd, cache);
     if (!timeLeft) {
